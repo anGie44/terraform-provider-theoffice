@@ -74,8 +74,7 @@ func (c *Client) GetQuotes(ctx context.Context, season, episode int) (*QuotesRes
 }
 
 func (c *Client) do(ctx context.Context, method, path string, rq, resp any) error {
-	var f func() error
-	f = func() error {
+	f := func() error {
 		logger := hclog.FromContext(ctx).Named("theoffice_client")
 		ctx = hclog.WithContext(ctx, logger)
 		url := fmt.Sprintf("%s/%s", c.baseURL, strings.TrimPrefix(path, "/"))
