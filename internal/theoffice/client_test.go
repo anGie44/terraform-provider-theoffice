@@ -19,8 +19,8 @@ func TestClientQuotes_season(t *testing.T) {
 		assert.Equal(t, "/season/1/format/quotes", r.URL.Path)
 		assert.Equal(t, "GET", r.Method)
 
-		w.Write([]byte(`[{"season": 1,"episode": 1,"scene": 1,"episode_name": "Diversity Day","character": "Jim","quote": "Really?"}]`))
-
+		_, err := w.Write([]byte(`[{"season": 1,"episode": 1,"scene": 1,"episode_name": "Diversity Day","character": "Jim","quote": "Really?"}]`))
+		assert.NoError(t, err)
 	}))
 	defer srv.Close()
 
@@ -46,8 +46,8 @@ func TestClientQuotes_episode(t *testing.T) {
 		assert.Equal(t, "/season/1/episode/1", r.URL.Path)
 		assert.Equal(t, "GET", r.Method)
 
-		w.Write([]byte(`[{"season": 1,"episode": 1,"scene": 1,"episode_name": "Diversity Day","character": "Jim","quote": "Really?"}]`))
-
+		_, err := w.Write([]byte(`[{"season": 1,"episode": 1,"scene": 1,"episode_name": "Diversity Day","character": "Jim","quote": "Really?"}]`))
+		assert.NoError(t, err)
 	}))
 	defer srv.Close()
 
@@ -74,7 +74,8 @@ func TestClientQuotes_none(t *testing.T) {
 		assert.Equal(t, "/season/1/format/quotes", r.URL.Path)
 		assert.Equal(t, "GET", r.Method)
 
-		w.Write([]byte(`[]`))
+		_, err := w.Write([]byte(`[]`))
+		assert.NoError(t, err)
 	}))
 	defer srv.Close()
 
