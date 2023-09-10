@@ -48,6 +48,27 @@ func NewClient(config *Config) (*Client, error) {
 	}, nil
 }
 
+type ConnectionsResponse struct {
+	Connections []Connection
+}
+
+type Connection struct {
+	Episode     int    `json:"episode,omitempty"`
+	EpisodeName string `json:"episode_name,omitempty"`
+	Links       []Link `json:"links,omitempty"`
+	Nodes       []Node `json:"nodes,omitempty"`
+}
+
+type Link struct {
+	Source string `json:"source,omitempty"`
+	Target string `json:"target,omitempty"`
+	Value  int    `json:"value,omitempty"`
+}
+
+type Node struct {
+	ID string `json:"id,omitempty"`
+}
+
 type QuotesResponse struct {
 	Quotes []Quote
 }
@@ -59,6 +80,14 @@ type Quote struct {
 	EpisodeName string `json:"episode_name,omitempty"`
 	Character   string `json:"character,omitempty"`
 	Quote       string `json:"quote,omitempty"`
+}
+
+func (c *Client) GetConnections(ctx context.Context, season int) (*ConnectionsResponse, error) {
+	path := fmt.Sprintf("/season/%d/format/connections", season)
+
+	resp := &ConnectionsResponse{}
+	err := c.do(ctx, "GET", path, nil, &resp.Connections)
+	return resp, err
 }
 
 func (c *Client) GetQuotes(ctx context.Context, season, episode int) (*QuotesResponse, error) {

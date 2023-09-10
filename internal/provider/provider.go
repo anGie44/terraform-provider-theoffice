@@ -103,6 +103,7 @@ func (p *theOfficeProvider) Resources(ctx context.Context) []func() resource.Res
 func (p *theOfficeProvider) DataSources(ctx context.Context) []func() datasource.DataSource {
 	return []func() datasource.DataSource{
 		NewQuotesDataSource,
+		NewConnectionsDataSource,
 	}
 }
 
