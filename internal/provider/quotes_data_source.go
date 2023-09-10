@@ -35,6 +35,7 @@ type QuotesDataSourceModel struct {
 	Episode types.Int64   `tfsdk:"episode"`
 	Season  types.Int64   `tfsdk:"season"`
 	Quotes  []quotesModel `tfsdk:"quotes"`
+	ID      types.String  `tfsdk:"id"`
 }
 
 type quotesModel struct {
@@ -56,6 +57,10 @@ func (d *QuotesDataSource) Schema(ctx context.Context, req datasource.SchemaRequ
 		MarkdownDescription: "Fetches a list of quotes",
 
 		Attributes: map[string]schema.Attribute{
+			"id": schema.StringAttribute{
+				Description: "Placeholder identifier attribute.",
+				Computed:    true,
+			},
 			"episode": schema.Int64Attribute{
 				Optional:    true,
 				Description: "Episode number to filter results by",
@@ -147,6 +152,8 @@ func (d *QuotesDataSource) Read(ctx context.Context, req datasource.ReadRequest,
 
 		data.Quotes = append(data.Quotes, quoteState)
 	}
+
+	data.ID = types.StringValue("placeholder")
 
 	// Save data into Terraform state
 	diags := resp.State.Set(ctx, &data)
