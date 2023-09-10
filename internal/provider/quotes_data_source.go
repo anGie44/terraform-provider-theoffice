@@ -18,8 +18,7 @@ import (
 
 // Ensure provider defined types fully satisfy framework interfaces.
 var (
-	_ datasource.DataSource              = &QuotesDataSource{}
-	_ datasource.DataSourceWithConfigure = &QuotesDataSource{}
+	_ datasource.DataSource = &QuotesDataSource{}
 )
 
 func NewQuotesDataSource() datasource.DataSource {
@@ -36,7 +35,6 @@ type QuotesDataSourceModel struct {
 	Episode types.Int64   `tfsdk:"episode"`
 	Season  types.Int64   `tfsdk:"season"`
 	Quotes  []quotesModel `tfsdk:"quotes"`
-	ID      types.String  `tfsdk:"id"`
 }
 
 type quotesModel struct {
@@ -55,18 +53,16 @@ func (d *QuotesDataSource) Metadata(ctx context.Context, req datasource.Metadata
 func (d *QuotesDataSource) Schema(ctx context.Context, req datasource.SchemaRequest, resp *datasource.SchemaResponse) {
 	resp.Schema = schema.Schema{
 		// This description is used by the documentation generator and the language server.
-		MarkdownDescription: "Fetches the list of quotes",
+		MarkdownDescription: "Fetches a list of quotes",
 
 		Attributes: map[string]schema.Attribute{
-			"id": schema.StringAttribute{
-				MarkdownDescription: "Placeholder identifier attribute",
-				Computed:            true,
-			},
 			"episode": schema.Int64Attribute{
-				Optional: true,
+				Optional:    true,
+				Description: "Episode number to filter results by",
 			},
 			"season": schema.Int64Attribute{
-				Required: true,
+				Required:    true,
+				Description: "Season number to filter results by",
 			},
 			"quotes": schema.ListNestedAttribute{
 				Description: "List of quotes",
@@ -74,22 +70,28 @@ func (d *QuotesDataSource) Schema(ctx context.Context, req datasource.SchemaRequ
 				NestedObject: schema.NestedAttributeObject{
 					Attributes: map[string]schema.Attribute{
 						"season": schema.Int64Attribute{
-							Computed: true,
+							Description: "The season the quote occurred in.",
+							Computed:    true,
 						},
 						"episode": schema.Int64Attribute{
-							Computed: true,
+							Description: "The episode the quote occurred in.",
+							Computed:    true,
 						},
 						"scene": schema.Int64Attribute{
-							Computed: true,
+							Description: "The scene the quote occurred in.",
+							Computed:    true,
 						},
 						"episode_name": schema.StringAttribute{
-							Computed: true,
+							Description: "The name of the episode the quote occurred in.",
+							Computed:    true,
 						},
 						"character": schema.StringAttribute{
-							Computed: true,
+							Description: "The character who said the quote.",
+							Computed:    true,
 						},
 						"quote": schema.StringAttribute{
-							Computed: true,
+							Description: "The quote as a string",
+							Computed:    true,
 						},
 					},
 				},
@@ -109,7 +111,7 @@ func (d *QuotesDataSource) Configure(ctx context.Context, req datasource.Configu
 	if !ok {
 		resp.Diagnostics.AddError(
 			"Unexpected Data Source Configure Type",
-			fmt.Sprintf("Expected *http.Client, got: %T. Please report this issue to the provider developers.", req.ProviderData),
+			fmt.Sprintf("Expected *theoffice.Client, got: %T. Please report this issue to the provider developers.", req.ProviderData),
 		)
 
 		return
@@ -145,8 +147,6 @@ func (d *QuotesDataSource) Read(ctx context.Context, req datasource.ReadRequest,
 
 		data.Quotes = append(data.Quotes, quoteState)
 	}
-
-	data.ID = types.StringValue("placeholder")
 
 	// Save data into Terraform state
 	diags := resp.State.Set(ctx, &data)

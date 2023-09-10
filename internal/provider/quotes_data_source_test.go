@@ -10,15 +10,30 @@ import (
 )
 
 func TestAccQuotesDataSource(t *testing.T) {
-	resource.Test(t, resource.TestCase{
-		PreCheck:                 func() { testAccPreCheck(t) },
+	resource.ParallelTest(t, resource.TestCase{
 		ProtoV6ProviderFactories: testAccProtoV6ProviderFactories,
 		Steps: []resource.TestStep{
 			// Read testing
 			{
 				Config: testAccQuotesDataSourceConfig,
 				Check: resource.ComposeAggregateTestCheckFunc(
-					resource.TestCheckResourceAttr("data.scaffolding_example.test", "id", "example-id"),
+					resource.TestCheckResourceAttrSet("data.theoffice_quotes.test", "quotes.#"),
+				),
+			},
+		},
+	})
+}
+
+func TestAccQuotesDataSource_filterByEpisode(t *testing.T) {
+	resource.ParallelTest(t, resource.TestCase{
+		ProtoV6ProviderFactories: testAccProtoV6ProviderFactories,
+		Steps: []resource.TestStep{
+			// Read testing
+			{
+				Config: testAccQuotesDataSourceConfig_filterByEpisode,
+				Check: resource.ComposeAggregateTestCheckFunc(
+					resource.TestCheckResourceAttrSet("data.theoffice_quotes.test", "quotes.#"),
+					resource.TestCheckResourceAttr("data.theoffice_quotes.test", "quotes.0.episode", "1"),
 				),
 			},
 		},
@@ -27,6 +42,13 @@ func TestAccQuotesDataSource(t *testing.T) {
 
 const testAccQuotesDataSourceConfig = `
 data "theoffice_quotes" "test" {
-  configurable_attribute = "example"
+  season = 1
+}
+`
+
+const testAccQuotesDataSourceConfig_filterByEpisode = `
+data "theoffice_quotes" "test" {
+  season = 1
+  episode = 1
 }
 `

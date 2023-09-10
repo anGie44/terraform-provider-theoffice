@@ -42,10 +42,11 @@ func (p *theOfficeProvider) Metadata(ctx context.Context, req provider.MetadataR
 
 func (p *theOfficeProvider) Schema(ctx context.Context, req provider.SchemaRequest, resp *provider.SchemaResponse) {
 	resp.Schema = schema.Schema{
+		Description: "Interact with theOffice API",
 		Attributes: map[string]schema.Attribute{
 			"endpoint": schema.StringAttribute{
-				MarkdownDescription: "the REST API endpoint to use for reading data",
-				Required:            true,
+				Description: "The REST API endpoint to use for reading data (default: http://theofficeapi-angelinepinilla.b4a.run)",
+				Optional:    true,
 			},
 		},
 	}
@@ -78,20 +79,6 @@ func (p *theOfficeProvider) Configure(ctx context.Context, req provider.Configur
 
 	if !data.Endpoint.IsNull() {
 		endpoint = data.Endpoint.ValueString()
-	}
-
-	if endpoint == "" {
-		resp.Diagnostics.AddAttributeError(
-			path.Root("endpoint"),
-			"Missing theOffice API Endpoint",
-			"The provider cannot create theOffice API client as there is a missing or empty value for theOffice API endpoint. "+
-				"Set the host value in the configuration or use the THEOFFICE_ENDPOINT environment variable. "+
-				"If either is already set, ensure the value is not empty.",
-		)
-	}
-
-	if resp.Diagnostics.HasError() {
-		return
 	}
 
 	// Example client configuration for data sources and resources

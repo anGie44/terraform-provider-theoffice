@@ -15,7 +15,7 @@ import (
 )
 
 const (
-	defaultAddress = "http://localhost:8200"
+	defaultAddress = "http://theofficeapi-angelinepinilla.b4a.run"
 
 	defaultRetryWaitMax = 30 * time.Second
 )
