@@ -31,6 +31,7 @@ data "theoffice_quotes" "example" {
 
 ### Read-Only
 
+- `id` (String) Placeholder identifier attribute.
 - `quotes` (Attributes List) List of quotes (see [below for nested schema](#nestedatt--quotes))
 
 <a id="nestedatt--quotes"></a>
