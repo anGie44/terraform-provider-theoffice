@@ -15,7 +15,7 @@ import (
 )
 
 const (
-	defaultAddress = "https://theoffice.fly.dev"
+	defaultAddress = "https://the-office.fly.dev"
 
 	defaultRetryWaitMax = 30 * time.Second
 )
