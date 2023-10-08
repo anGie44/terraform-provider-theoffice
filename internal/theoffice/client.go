@@ -15,7 +15,7 @@ import (
 )
 
 const (
-	defaultAddress = "http://theofficeapi-angelinepinilla.b4a.run"
+	defaultAddress = "https://theoffice.fly.dev"
 
 	defaultRetryWaitMax = 30 * time.Second
 )
