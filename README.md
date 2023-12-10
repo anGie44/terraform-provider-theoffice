@@ -1,4 +1,6 @@
 # Terraform Provider theOffice
+![Tests](https://github.com/anGie44/terraform-provider-theoffice/actions/workflows/test.yml/badge.svg)
+![Release](https://github.com/anGie44/terraform-provider-theoffice/actions/workflows/release.yml/badge.svg)
 
 ## Requirements
 
