@@ -21,4 +21,4 @@ provider "theoffice" {}
 
 ### Optional
 
-- `endpoint` (String) The REST API endpoint to use for reading data (default: http://theofficeapi-angelinepinilla.b4a.run)
+- `endpoint` (String) The REST API endpoint to use for reading data (default: https://the-office.fly.dev)
