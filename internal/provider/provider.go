@@ -45,7 +45,7 @@ func (p *theOfficeProvider) Schema(ctx context.Context, req provider.SchemaReque
 		Description: "Interact with theOffice API",
 		Attributes: map[string]schema.Attribute{
 			"endpoint": schema.StringAttribute{
-				Description: "The REST API endpoint to use for reading data (default: http://theofficeapi-angelinepinilla.b4a.run)",
+				Description: "The REST API endpoint to use for reading data (default: https://the-office.fly.dev)",
 				Optional:    true,
 			},
 		},
