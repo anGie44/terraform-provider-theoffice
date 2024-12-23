@@ -2,7 +2,10 @@ module tools
 
 go 1.23.4
 
-require github.com/hashicorp/terraform-plugin-docs v0.20.1
+require (
+	github.com/hashicorp/copywrite v0.19.0
+	github.com/hashicorp/terraform-plugin-docs v0.20.1
+)
 
 require (
 	github.com/AlecAivazis/survey/v2 v2.3.6 // indirect
@@ -33,7 +36,6 @@ require (
 	github.com/google/go-querystring v1.1.0 // indirect
 	github.com/google/uuid v1.3.0 // indirect
 	github.com/hashicorp/cli v1.1.6 // indirect
-	github.com/hashicorp/copywrite v0.19.0 // indirect
 	github.com/hashicorp/errwrap v1.1.0 // indirect
 	github.com/hashicorp/go-checkpoint v0.5.0 // indirect
 	github.com/hashicorp/go-cleanhttp v0.5.2 // indirect
@@ -81,18 +83,17 @@ require (
 	github.com/zclconf/go-cty v1.15.0 // indirect
 	go.abhg.dev/goldmark/frontmatter v0.2.0 // indirect
 	go.mongodb.org/mongo-driver v1.10.0 // indirect
-	golang.org/x/crypto v0.21.0 // indirect
+	golang.org/x/crypto v0.31.0 // indirect
 	golang.org/x/exp v0.0.0-20230626212559-97b1e661b5df // indirect
 	golang.org/x/mod v0.21.0 // indirect
 	golang.org/x/net v0.23.0 // indirect
 	golang.org/x/oauth2 v0.8.0 // indirect
-	golang.org/x/sync v0.9.0 // indirect
-	golang.org/x/sys v0.21.0 // indirect
-	golang.org/x/term v0.18.0 // indirect
-	golang.org/x/text v0.20.0 // indirect
+	golang.org/x/sync v0.10.0 // indirect
+	golang.org/x/sys v0.28.0 // indirect
+	golang.org/x/term v0.27.0 // indirect
+	golang.org/x/text v0.21.0 // indirect
 	google.golang.org/appengine v1.6.7 // indirect
 	google.golang.org/protobuf v1.28.0 // indirect
-	gopkg.in/check.v1 v1.0.0-20201130134442-10cb98267c6c // indirect
 	gopkg.in/yaml.v2 v2.4.0 // indirect
 	gopkg.in/yaml.v3 v3.0.1 // indirect
 )
