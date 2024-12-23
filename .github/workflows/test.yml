@@ -46,7 +46,7 @@ jobs:
           go-version-file: 'go.mod'
           cache: true
       # We need the latest version of Terraform for our documentation generation to use
-      - uses: hashicorp/setup-terraform@v3
+      - uses: hashicorp/setup-terraform@v3.1.2
         with:
           terraform_wrapper: false 
       - run: make generate
@@ -84,7 +84,7 @@ jobs:
         with:
           go-version-file: 'go.mod'
           cache: true
-      - uses: hashicorp/setup-terraform@633666f66e0061ca3b725c73b2ec20cd13a8fdd1 # v2.0.3
+      - uses: hashicorp/setup-terraform@344fef46b6edc7c46ce8b3b8b0a3ece7e77e05f0 # v2.0.3
         with:
           terraform_version: ${{ matrix.terraform }}
           terraform_wrapper: false
