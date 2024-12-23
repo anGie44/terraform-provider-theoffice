@@ -45,6 +45,10 @@ jobs:
         with:
           go-version-file: 'go.mod'
           cache: true
+      # We need the latest version of Terraform for our documentation generation to use
+      - uses: hashicorp/setup-terraform@v3
+        with:
+          terraform_wrapper: false 
       - run: go generate ./...
       - name: git diff
         run: |
@@ -70,6 +74,9 @@ jobs:
           - '1.5.*'
           - '1.6.*'
           - '1.7.*'
+          - '1.8.*'
+          - '1.9.*'
+          - '1.10.*'
 
     steps:
       - uses: actions/checkout@c85c95e3d7251135ab7dc9ce3241c5835cc595a9 # v3.5.3
